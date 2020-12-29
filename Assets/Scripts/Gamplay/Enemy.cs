@@ -33,8 +33,10 @@ public class Enemy : Rebounder
     }
 
     public bool Chargeing { get; private set; }
+    new public Rigidbody2D rigidbody;
     private void Start()
     {
+        rigidbody = GetComponent<Rigidbody2D>();
         Origin = transform.position;
         enemies.Enqueue(this);
         if(EnemyChargeStartEvent == null)
@@ -48,11 +50,11 @@ public class Enemy : Rebounder
         Enemy enemy = null;
         while(enemy == null)
         {
-            enemy = enemies.Dequeue();
-            if(enemies.Count <= 0)
+            if (enemies.Count <= 0)
             {
                 return;
             }
+            enemy = enemies.Dequeue();
         }
         enemy.StartCharge();
         enemies.Enqueue(enemy);
@@ -60,7 +62,7 @@ public class Enemy : Rebounder
 
     private void StartCharge()
     {
-        throw new NotImplementedException();
+        Chargeing = true;
     }
 
     private void Update()
@@ -130,21 +132,31 @@ public class Enemy : Rebounder
 
     private void Charge()
     {
-        throw new NotImplementedException();
+        bool v = transform.position.y - yPos > .5f;
+        rigidbody.velocity = v ? Vector2.down : Vector2.zero;
+        if (!v)
+        {
+            Chargeing = false;
+        }
     }
 
-    private void OnDrawGizmosSelected()
+    public override void OnDrawGizmosSelected()
     {
+        base.OnDrawGizmosSelected();
         Gizmos.DrawLine(Origin + Vector2.left * idelShiftAmount, Origin + Vector2.right * idelShiftAmount);
     }
 }
 
 #if UNITY_EDITOR
+[CustomEditor(typeof(Enemy))]
 public class EnemyEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
+        GUI.enabled = false;
+        GUILayout.Toggle(((Enemy)target).Chargeing, "Chargeing");
+        GUI.enabled = true;
         if (GUILayout.Button("Charge"))
         {
             Enemy.EnemyChargeStartEvent?.Invoke();

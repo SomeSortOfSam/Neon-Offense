@@ -14,7 +14,7 @@ public class Rebounder : MonoBehaviour
         newPos.y = Mathf.Abs(transform.position.y + bounds.extents.y) > cameraBounds.extents.y ? -transform.position.y : transform.position.y;
         transform.position = newPos == (Vector2)transform.position ? transform.position : (Vector3)newPos;
     }
-    private void OnDrawGizmosSelected()
+    public virtual void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireCube(transform.position, bounds.size);
     }
