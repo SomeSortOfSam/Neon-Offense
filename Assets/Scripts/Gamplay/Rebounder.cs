@@ -2,15 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Rebounder : MonoBehaviour
 {
+    public Bounds bounds;
     // Update is called once per frame
-    void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         Bounds cameraBounds = GamplayCamera.instance.CameraBounds;
         Vector2 newPos = new Vector2();
-        newPos.x = Mathf.Abs(transform.position.x) > cameraBounds.extents.x ? -transform.position.x : transform.position.x;
-        newPos.y = Mathf.Abs(transform.position.y) > cameraBounds.extents.y ? -transform.position.y : transform.position.y;
-        transform.position = newPos == (Vector2)transform.position ? transform.position : (Vector3)newPos;
+        bool xCheck = cameraBounds.Contains(transform.position + (Vector3.right * bounds.extents.x * -Mathf.Sign(transform.position.x)));
+        bool yCheck = cameraBounds.Contains(transform.position + (Vector3.up * bounds.extents.y * -Mathf.Sign(transform.position.y)));
+        newPos.x = xCheck ? transform.position.x : -transform.position.x;
+        newPos.y = yCheck ? transform.position.y : -transform.position.y;
+        if(newPos != (Vector2)transform.position)
+        {
+            transform.position = newPos;
+            GetComponent<Rigidbody2D>().velocity += Vector2.zero - newPos;
+        }
+
+    }
+    public virtual void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireCube(transform.position, bounds.size);
     }
 }
