@@ -22,7 +22,7 @@ public class Rebounder : MonoBehaviour
         }
 
     }
-    private void OnDrawGizmosSelected()
+    public virtual void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireCube(transform.position, bounds.size);
     }
