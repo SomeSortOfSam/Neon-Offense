@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class Rebounder : MonoBehaviour
 {
     public Bounds bounds;
@@ -18,7 +17,6 @@ public class Rebounder : MonoBehaviour
         if(newPos != (Vector2)transform.position)
         {
             transform.position = newPos;
-            GetComponent<Rigidbody2D>().velocity += Vector2.zero - newPos;
         }
 
     }

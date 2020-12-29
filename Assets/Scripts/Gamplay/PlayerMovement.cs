@@ -2,52 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D))]
+public class PlayerMovement : Rebounder
 {
-    public Rigidbody2D rb;
+    Rigidbody2D ridgidBody;
+    public float speed = 5;
 
+    private void Start()
+    {
+        ridgidBody = GetComponent<Rigidbody2D>();
+    }
     void Update()
     {
-        //going
-        if (Input.GetKey(KeyCode.W))
-        {
-            rb.velocity = new Vector2(0, 5);
-            
-        }
-            //stopping
-            if (Input.GetKeyUp(KeyCode.W))
-            {
-                rb.velocity = new Vector2(0, 0);
-            }
-        //going
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb.velocity = new Vector2(0, -5);
-        }
-            //stopping
-            if (Input.GetKeyUp(KeyCode.S))
-            {
-                rb.velocity = new Vector2(0, 0);
-            }
-        //going
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.velocity = new Vector2(-5, 0);
-        }
-            //stopping
-            if (Input.GetKeyUp(KeyCode.A))
-            {
-                rb.velocity = new Vector2(0, 0);
-            }
-        //going
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.velocity = new Vector2(5, 0);
-        }
-            //stopping
-            if (Input.GetKeyUp(KeyCode.D))
-            {
-                rb.velocity = new Vector2(0, 0);
-            }
+        ridgidBody.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, Input.GetAxisRaw("Vertical") * speed);
     }
 }

@@ -111,5 +111,37 @@ public class RebounderTests
         rebounder.FixedUpdate();
         Assert.AreNotEqual(oldPos, rebounder.transform.position);
     }
+    [Test]
+    public void positive_x_slight_positive_y_only_rebounds()
+    {
+        Rebounder rebounder = SetUpRebounder();
+        Vector3 oldPos = rebounder.transform.position = new Vector3(GamplayCamera.instance.CameraBounds.extents.y + .6f, .1f, 0);
+        rebounder.FixedUpdate();
+        Assert.AreNotEqual(new Vector3(-(GamplayCamera.instance.CameraBounds.extents.y + .6f), .1f, 0), rebounder.transform.position);
+    }
+    [Test]
+    public void negitive_x_slight_positive_y_only_rebounds()
+    {
+        Rebounder rebounder = SetUpRebounder();
+        Vector3 oldPos = rebounder.transform.position = new Vector3(-GamplayCamera.instance.CameraBounds.extents.y - .6f, .1f, 0);
+        rebounder.FixedUpdate();
+        Assert.AreNotEqual(new Vector3(-(-GamplayCamera.instance.CameraBounds.extents.y - .6f), .1f, 0), rebounder.transform.position);
+    }
+    [Test]
+    public void positive_x_slight_negitive_y_only_rebounds()
+    {
+        Rebounder rebounder = SetUpRebounder();
+        Vector3 oldPos = rebounder.transform.position = new Vector3(GamplayCamera.instance.CameraBounds.extents.y + .6f, -.1f, 0);
+        rebounder.FixedUpdate();
+        Assert.AreNotEqual(new Vector3(-(GamplayCamera.instance.CameraBounds.extents.y + .6f), -.1f, 0), rebounder.transform.position);
+    }
+    [Test]
+    public void negitive_x_slight_negitive_y_only_rebounds()
+    {
+        Rebounder rebounder = SetUpRebounder();
+        Vector3 oldPos = rebounder.transform.position = new Vector3(-GamplayCamera.instance.CameraBounds.extents.y - .6f, -.1f, 0);
+        rebounder.FixedUpdate();
+        Assert.AreNotEqual(new Vector3(-(-GamplayCamera.instance.CameraBounds.extents.y - .6f), -.1f, 0), rebounder.transform.position);
+    }
 }
 
