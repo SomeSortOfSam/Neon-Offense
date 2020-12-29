@@ -31,8 +31,9 @@ public class GamplayCamera : MonoBehaviour
         return orthigraphicSize;
     }
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         instance = this;
+        camera = GetComponent<Camera>();
     }
 }
