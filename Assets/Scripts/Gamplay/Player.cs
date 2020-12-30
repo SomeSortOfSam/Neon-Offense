@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D),typeof(Animator))]
 public class Player : Rebounder, IGun
 {
     Rigidbody2D ridgidBody;
+    Animator animator;
     public float speed = 5;
     public int health = 3;
 
@@ -23,7 +24,23 @@ public class Player : Rebounder, IGun
         ridgidBody = GetComponent<Rigidbody2D>();
         ammo = 1;
         firingPause = 100;
+
+        animator = GetComponent<Animator>();
+        animator.SetBool("Lost", false);
+        damageEvent += OnHurt;
+        StateManager.loseEvent += OnLose;
     }
+
+    private void OnLose()
+    {
+        animator.SetBool("Lost", true);
+    }
+
+    private void OnHurt(int obj)
+    {
+        animator.SetTrigger("Hurt");
+    }
+
     void Update()
     {
         ridgidBody.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, Input.GetAxisRaw("Vertical") * speed);

@@ -10,6 +10,9 @@ public class StateManager : MonoBehaviour
     public CanvasGroup loseImage;
     public Vector3 winObjectSpawnPos;
 
+    public static Action loseEvent;
+    public static Action winEvent;
+
     public static void Lose(int health)
     {
         if(health < 0)
@@ -19,6 +22,7 @@ public class StateManager : MonoBehaviour
     }
     public static void Lose()
     {
+        loseEvent?.Invoke();
         lost = true;
         instance.StartCoroutine("LoseCorutine");
     }
@@ -40,6 +44,7 @@ public class StateManager : MonoBehaviour
     {
         if(!lost)
         {
+            winEvent?.Invoke();
             instance.winObject.SetActive(true);
         }
     }
