@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -7,11 +8,14 @@ public class Player : Rebounder, IGun
 {
     Rigidbody2D ridgidBody;
     public float speed = 5;
+    public int health = 3;
 
     public GameObject bullet;
     GameObject IGun.Bullet { get => bullet; set => bullet = value; }
     public int Ammo { get; set; }
     public int firingPause;
+
+    public static Action<int> damageEvent;
 
     private void Start()
     {
@@ -30,6 +34,18 @@ public class Player : Rebounder, IGun
         if (firingPause < 30)
         {
             firingPause++;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.TryGetComponent(out Enemy enemy))
+        {
+            health--;
+            damageEvent?.Invoke(health);
+            if(health < 0)
+            {
+                StateManager.Lose();
+            }
         }
     }
 }

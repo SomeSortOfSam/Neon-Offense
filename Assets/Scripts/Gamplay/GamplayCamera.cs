@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,5 +36,16 @@ public class GamplayCamera : MonoBehaviour
     {
         instance = this;
         camera = GetComponent<Camera>();
+        Player.damageEvent += Shake;
+    }
+
+    private void Shake(int obj)
+    {
+        StartCoroutine(ShakeCorutione());
+    }
+
+    IEnumerator ShakeCorutione()
+    {
+        yield return null;
     }
 }
