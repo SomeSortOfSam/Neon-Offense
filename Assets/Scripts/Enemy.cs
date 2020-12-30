@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(AudioSource))]
 public class Enemy : Rebounder
 {
     public static List<Enemy> enemies = new List<Enemy>();
@@ -30,9 +25,12 @@ public class Enemy : Rebounder
             yPos = value.y;
         }
     }
+    public bool shifted;
+    public bool chargeing;
 
-    public bool Chargeing;
     public Rigidbody2D rigidbody;
+    public AudioSource audioSource;
+    public AudioClip deathSound;
     public virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -42,7 +40,7 @@ public class Enemy : Rebounder
 
     private void Update()
     {
-        if (Chargeing)
+        if (chargeing)
         {
             Charge();
         }
@@ -50,21 +48,26 @@ public class Enemy : Rebounder
         {
             Idel();
         }
-        
+
     }
 
     private void Idel()
     {
         idelInBetweenTimer++;
-        if(idelInBetweenTimer > idelInBetweenDurration)
+        if (idelInBetweenTimer > idelInBetweenDurration && !shifted)
         {
             idelShiftTimer++;
-            if(idelShiftTimer > idelShiftDurration)
+            if (idelShiftTimer > idelShiftDurration)
             {
                 idelShiftTimer = 0;
                 idelInBetweenTimer = 0;
+                shifted = true;
             }
             rigidbody.velocity = GetVelocityFromIdelTimer();
+        }
+        else if (idelInBetweenTimer > idelInBetweenDurration && shifted)
+        {
+            chargeing = true;
         }
         else
         {
@@ -97,7 +100,7 @@ public class Enemy : Rebounder
         int stage = 0;
         while (stageTime <= fullDurration)
         {
-            if(time < stageTime)
+            if (time < stageTime)
             {
                 return stage;
             }
@@ -105,7 +108,7 @@ public class Enemy : Rebounder
             {
                 stageTime += quaterDurration;
                 stage++;
-            } 
+            }
         }
         return stage;
     }
@@ -116,14 +119,15 @@ public class Enemy : Rebounder
         rigidbody.velocity = v ? Vector2.down : Vector2.zero;
         if (!v)
         {
-            Chargeing = false;
+            chargeing = false;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out BasicPlayerBullet bullet))
+        if (collision.TryGetComponent(out Bullet bullet) && bullet.Friendly)
         {
+            audioSource.PlayOneShot(deathSound);
             Destroy(gameObject);
         }
     }
@@ -131,7 +135,7 @@ public class Enemy : Rebounder
     private void OnDestroy()
     {
         enemies.Remove(this);
-        if(enemies.Count <= 0)
+        if (enemies.Count <= 0)
         {
             StateManager.Win();
         }

@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(AudioSource))]
-public class Player : Rebounder, IGun
+public class Player : Rebounder
 {
     public Rigidbody2D ridgidBody;
     public Animator animator;
@@ -18,9 +18,7 @@ public class Player : Rebounder, IGun
     public int health = 3;
 
     public GameObject bullet;
-    GameObject IGun.Bullet { get => bullet; set => bullet = value; }
     public int ammo;
-    int IGun.Ammo { get => ammo; set => ammo = value; }
     public int firingPause;
 
     public static Action<int> damageEvent;

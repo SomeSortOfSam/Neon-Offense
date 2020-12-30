@@ -1,17 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class BasicPlayerBullet : MonoBehaviour, IBullet
+public class Bullet: MonoBehaviour
 {
     public Rigidbody2D rigidBody;
+    public virtual bool Friendly => false;
 
-    public int damage { get; set; } 
+    public int damage { get; set; }
     public float speed;
     public bool friendly => true;
 
-    void Start()
+    public virtual void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.velocity = new Vector2(0, speed);
