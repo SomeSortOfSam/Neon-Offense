@@ -9,14 +9,13 @@ using UnityEditor;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : Rebounder
 {
-    public static Action EnemyChargeStartEvent;
     public static List<Enemy> enemies = new List<Enemy>();
 
     public float idelShiftAmount;
     public int idelShiftDurration;
-    int idelShiftTimer;
+    public int idelShiftTimer;
     public int idelInBetweenDurration;
-    int idelInBetweenTimer;
+    public int idelInBetweenTimer;
     public float xPos;
     public float yPos;
     public Vector2 Origin
@@ -65,11 +64,16 @@ public class Enemy : Rebounder
                 idelShiftTimer = 0;
                 idelInBetweenTimer = 0;
             }
-            rigidbody.velocity = GetPositionFromIdelTimer();
+            rigidbody.velocity = GetVelocityFromIdelTimer();
         }
+        else
+        {
+            rigidbody.velocity = Vector3.zero;
+        }
+
     }
 
-    private Vector3 GetPositionFromIdelTimer()
+    private Vector3 GetVelocityFromIdelTimer()
     {
         switch (GetIdelStage(idelShiftTimer, idelShiftDurration))
         {
@@ -139,18 +143,3 @@ public class Enemy : Rebounder
         Gizmos.DrawLine(Origin + Vector2.left * idelShiftAmount, Origin + Vector2.right * idelShiftAmount);
     }
 }
-
-#if UNITY_EDITOR
-[CustomEditor(typeof(Enemy))]
-public class EnemyEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        if (GUILayout.Button("Charge"))
-        {
-            Enemy.EnemyChargeStartEvent?.Invoke();
-        }
-    }
-}
-#endif

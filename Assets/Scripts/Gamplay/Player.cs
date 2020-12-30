@@ -12,7 +12,8 @@ public class Player : Rebounder, IGun
 
     public GameObject bullet;
     GameObject IGun.Bullet { get => bullet; set => bullet = value; }
-    public int Ammo { get; set; }
+    public int ammo;
+    int IGun.Ammo { get => ammo; set => ammo = value; }
     public int firingPause;
 
     public static Action<int> damageEvent;
@@ -20,13 +21,13 @@ public class Player : Rebounder, IGun
     private void Start()
     {
         ridgidBody = GetComponent<Rigidbody2D>();
-        Ammo = 1;
+        ammo = 1;
         firingPause = 100;
     }
     void Update()
     {
         ridgidBody.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, Input.GetAxisRaw("Vertical") * speed);
-        if (Input.GetMouseButton(0) && this.Ammo > 0 && firingPause > 29)
+        if (Input.GetMouseButton(0) && ammo > 0 && firingPause > 29)
         {
             Instantiate(bullet, gameObject.transform.position + new Vector3(0, 1f, 0), new Quaternion());
             firingPause = 0;
