@@ -7,7 +7,7 @@ using UnityEngine;
 public class GamplayCamera : MonoBehaviour
 {
     public static GamplayCamera instance;
-    new public Camera camera;
+    public Camera camera;
     public Bounds CameraBounds
     {
         get

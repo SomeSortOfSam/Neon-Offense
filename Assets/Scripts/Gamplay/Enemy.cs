@@ -32,7 +32,7 @@ public class Enemy : Rebounder
     }
 
     public bool Chargeing;
-    new public Rigidbody2D rigidbody;
+    public Rigidbody2D rigidbody;
     public virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
