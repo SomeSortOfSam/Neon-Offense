@@ -2,13 +2,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StateManager : MonoBehaviour
+public static class StateManager
 {
-    public static StateManager instance;
     public static bool lost = false;
-    public GameObject winObject;
-    public CanvasGroup loseImage;
-
     public static Action loseEvent;
     public static Action winEvent;
 
@@ -16,20 +12,6 @@ public class StateManager : MonoBehaviour
     {
         loseEvent?.Invoke();
         lost = true;
-        instance.StartCoroutine("LoseCorutine");
-    }
-
-    private System.Collections.IEnumerator LoseCorutine()
-    {
-        float time = 0;
-        while(time < 1)
-        {
-            loseImage.alpha = time;
-            time += .01f;
-            yield return null;
-        }
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 
     public static void Win()
@@ -37,13 +19,6 @@ public class StateManager : MonoBehaviour
         if(!lost)
         {
             winEvent?.Invoke();
-            instance.winObject.SetActive(true);
         }
-    }
-
-    private void Start()
-    {
-        instance = this;
-        lost = false;
     }
 }
