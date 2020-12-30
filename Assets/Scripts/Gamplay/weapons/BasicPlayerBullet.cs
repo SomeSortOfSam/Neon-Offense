@@ -2,25 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicPlayerBullet : Bullet
+[RequireComponent(typeof(Rigidbody2D))]
+public class BasicPlayerBullet : MonoBehaviour, IBullet
 {
-    public Rigidbody2D rb;
+    public Rigidbody2D rigidBody;
+
+    public int damage { get; set; } 
+    public float speed;
+    public bool friendly => true;
 
     void Start()
     {
-        this.friendly = true;
-        rb.velocity = new Vector2(0, this.speed);
+        rigidBody = GetComponent<Rigidbody2D>();
+        rigidBody.velocity = new Vector2(0, speed);
         StartCoroutine("TimeToDeath");
     }
 
     public IEnumerator TimeToDeath()
     {
         yield return new WaitForSeconds(1f);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }

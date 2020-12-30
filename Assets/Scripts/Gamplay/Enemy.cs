@@ -10,7 +10,7 @@ using UnityEditor;
 public class Enemy : Rebounder
 {
     public static Action EnemyChargeStartEvent;
-    public static Queue<Enemy> enemies = new Queue<Enemy>();
+    public static List<Enemy> enemies = new List<Enemy>();
 
     public float idelShiftAmount;
     public int idelShiftDurration;
@@ -32,37 +32,13 @@ public class Enemy : Rebounder
         }
     }
 
-    public bool Chargeing { get; private set; }
+    public bool Chargeing;
     new public Rigidbody2D rigidbody;
-    private void Start()
+    public virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         Origin = transform.position;
-        enemies.Enqueue(this);
-        if(EnemyChargeStartEvent == null)
-        {
-            EnemyChargeStartEvent += OnEnemyStartCharge;
-        }
-    }
-
-    private static void OnEnemyStartCharge()
-    {
-        Enemy enemy = null;
-        while(enemy == null)
-        {
-            if (enemies.Count <= 0)
-            {
-                return;
-            }
-            enemy = enemies.Dequeue();
-        }
-        enemy.StartCharge();
-        enemies.Enqueue(enemy);
-    }
-
-    private void StartCharge()
-    {
-        Chargeing = true;
+        enemies.Add(this);
     }
 
     private void Update()
@@ -89,7 +65,7 @@ public class Enemy : Rebounder
                 idelShiftTimer = 0;
                 idelInBetweenTimer = 0;
             }
-            transform.position = GetPositionFromIdelTimer();
+            rigidbody.velocity = GetPositionFromIdelTimer();
         }
     }
 
@@ -98,15 +74,15 @@ public class Enemy : Rebounder
         switch (GetIdelStage(idelShiftTimer, idelShiftDurration))
         {
             case 0:
-                return Vector3.Lerp(Origin,Origin + Vector2.left * idelShiftAmount,Mathf.Lerp(0f, idelShiftDurration/4f,idelShiftTimer));
+                return Origin - Origin + Vector2.left * idelShiftAmount;
             case 1:
-                return Vector3.Lerp(Origin + Vector2.left * idelShiftAmount, Origin, Mathf.Lerp(idelShiftDurration / 4f, idelShiftDurration / 2f, idelShiftTimer));
+                return Origin + Vector2.left * idelShiftAmount - Origin;
             case 2:
-                return Vector3.Lerp(Origin, Origin + Vector2.right * idelShiftAmount, Mathf.Lerp(idelShiftDurration / 2f, (idelShiftDurration / 4f) * 3f, idelShiftTimer));
+                return Origin - Origin + Vector2.right * idelShiftAmount;
             case 3:
-                return Vector3.Lerp(Origin + Vector2.right * idelShiftAmount, Origin, Mathf.Lerp((idelShiftDurration / 4f) * 3f, idelShiftDurration, idelShiftTimer));
+                return Origin + Vector2.right * idelShiftAmount - Origin;
         }
-        return Origin;
+        return Vector3.zero;
 
     }
 
@@ -140,6 +116,23 @@ public class Enemy : Rebounder
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out BasicPlayerBullet bullet))
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        enemies.Remove(this);
+        if(enemies.Count <= 0)
+        {
+            StateManager.Win();
+        }
+    }
+
     public override void OnDrawGizmosSelected()
     {
         base.OnDrawGizmosSelected();
@@ -154,9 +147,6 @@ public class EnemyEditor : Editor
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-        GUI.enabled = false;
-        GUILayout.Toggle(((Enemy)target).Chargeing, "Chargeing");
-        GUI.enabled = true;
         if (GUILayout.Button("Charge"))
         {
             Enemy.EnemyChargeStartEvent?.Invoke();

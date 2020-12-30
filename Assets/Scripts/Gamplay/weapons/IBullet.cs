@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public interface IBullet
 {
-    public int ammo;
-    public int firingPause;
+    int damage { get; }
+    bool friendly { get; }
 }
