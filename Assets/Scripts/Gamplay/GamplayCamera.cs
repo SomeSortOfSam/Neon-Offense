@@ -36,7 +36,7 @@ public class GamplayCamera : MonoBehaviour
     {
         instance = this;
         camera = GetComponent<Camera>();
-        Player.damageEvent += Shake;
+        //Player.damageEvent += Shake;
     }
 
     private void Shake(int obj)

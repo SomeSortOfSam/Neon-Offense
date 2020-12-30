@@ -12,8 +12,8 @@ public class Rebounder : MonoBehaviour
         Vector2 newPos = new Vector2();
         bool xCheck = cameraBounds.Contains(transform.position + bounds.center + (Vector3.right * bounds.extents.x * -Mathf.Sign(transform.position.x)));
         bool yCheck = cameraBounds.Contains(transform.position + bounds.center + (Vector3.up * bounds.extents.y * -Mathf.Sign(transform.position.y)));
-        newPos.x = xCheck ? transform.position.x : -transform.position.x;
-        newPos.y = yCheck ? transform.position.y : -transform.position.y;
+        newPos.x = xCheck ? transform.position.x : -transform.position.x + (.1f * -Mathf.Sign(transform.position.x));
+        newPos.y = yCheck ? transform.position.y : -transform.position.y + (.1f * -Mathf.Sign(transform.position.y));
         if(newPos != (Vector2)transform.position)
         {
             transform.position = newPos;
