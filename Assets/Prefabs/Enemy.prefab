@@ -98,13 +98,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.3, y: 0.3, z: 0}
+    m_Extent: {x: 0.46, y: 0.47, z: 0}
   idelShiftAmount: 0.3
   idelShiftDurration: 100
   idelInBetweenDurration: 300
   xPos: 0
   yPos: 0
-  rigidbody: {fileID: 0}
+  Chargeing: 0
+  rigidbody: {fileID: 2475977461923685560}
 --- !u!50 &2475977461923685560
 Rigidbody2D:
   serializedVersion: 4
@@ -136,14 +137,14 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -151,15 +152,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.13882896, y: 0.07699686}
-      - {x: 0.13972062, y: 0.20533374}
-      - {x: -0.13801913, y: 0.20608425}
-      - {x: -0.13905904, y: 0.07585883}
-      - {x: -0.1796318, y: 0.07516432}
-      - {x: -0.2664949, y: 0.26712012}
-      - {x: -0.2759136, y: -0.12020768}
-      - {x: -0.12460615, y: -0.26821667}
-      - {x: 0.13135132, y: -0.26821667}
-      - {x: 0.2737145, y: -0.12062375}
-      - {x: 0.27041572, y: 0.27379084}
-      - {x: 0.17805262, y: 0.0769971}
+    - - {x: 0.43, y: 0.43}
+      - {x: 0.28, y: 0.12}
+      - {x: 0.22, y: 0.12}
+      - {x: 0.22, y: 0.32}
+      - {x: -0.22, y: 0.32}
+      - {x: -0.22, y: 0.12}
+      - {x: -0.28, y: 0.12}
+      - {x: -0.43, y: 0.43}
+      - {x: -0.43, y: -0.2}
+      - {x: -0.2, y: -0.43}
+      - {x: 0.2, y: -0.43}
+      - {x: 0.43, y: -0.2}
