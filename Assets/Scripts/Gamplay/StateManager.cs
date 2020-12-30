@@ -8,18 +8,10 @@ public class StateManager : MonoBehaviour
     public static bool lost = false;
     public GameObject winObject;
     public CanvasGroup loseImage;
-    public Vector3 winObjectSpawnPos;
 
     public static Action loseEvent;
     public static Action winEvent;
 
-    public static void Lose(int health)
-    {
-        if(health < 0)
-        {
-            Lose();
-        }
-    }
     public static void Lose()
     {
         loseEvent?.Invoke();
@@ -37,7 +29,7 @@ public class StateManager : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 
     public static void Win()
@@ -53,10 +45,5 @@ public class StateManager : MonoBehaviour
     {
         instance = this;
         lost = false;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawSphere(winObjectSpawnPos, .1f);
     }
 }

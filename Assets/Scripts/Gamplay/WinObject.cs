@@ -8,6 +8,7 @@ public class WinObject : MonoBehaviour
     {
         if(collision.TryGetComponent(out Player player))
         {
+            player.animator.SetTrigger("Win");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
