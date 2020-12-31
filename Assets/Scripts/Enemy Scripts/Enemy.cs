@@ -51,7 +51,7 @@ public class Enemy : Rebounder
 
     }
 
-    private void Idel()
+    public virtual void Idel()
     {
         idelInBetweenTimer++;
         if (idelInBetweenTimer > idelInBetweenDurration && !shifted)
