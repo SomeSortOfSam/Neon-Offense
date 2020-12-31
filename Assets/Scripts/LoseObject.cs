@@ -17,6 +17,6 @@ public class LoseObject : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(1f);
-        StateManager.RestartGame();
+        Application.Quit();
     }
 }

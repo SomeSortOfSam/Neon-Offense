@@ -6,7 +6,7 @@ public class Enemy : Rebounder
 {
     public static List<Enemy> enemies = new List<Enemy>();
 
-    public float idelShiftAmount;
+    public float idelShiftSpeed;
     public int idelShiftDurration;
     public int idelShiftTimer;
     public int idelInBetweenDurration;
@@ -82,13 +82,13 @@ public class Enemy : Rebounder
         switch (GetIdelStage(idelShiftTimer, idelShiftDurration))
         {
             case 0:
-                return Origin - Origin + Vector2.left * idelShiftAmount;
+                return Origin - Origin + Vector2.left * idelShiftSpeed;
             case 1:
-                return Origin + Vector2.left * idelShiftAmount - Origin;
+                return Origin + Vector2.left * idelShiftSpeed - Origin;
             case 2:
-                return Origin - Origin + Vector2.right * idelShiftAmount;
+                return Origin - Origin + Vector2.right * idelShiftSpeed;
             case 3:
-                return Origin + Vector2.right * idelShiftAmount - Origin;
+                return Origin + Vector2.right * idelShiftSpeed - Origin;
         }
         return Vector3.zero;
 
@@ -145,6 +145,6 @@ public class Enemy : Rebounder
     public override void OnDrawGizmosSelected()
     {
         base.OnDrawGizmosSelected();
-        Gizmos.DrawLine(Origin + Vector2.left * idelShiftAmount, Origin + Vector2.right * idelShiftAmount);
+        Gizmos.DrawLine(Origin + Vector2.left * idelShiftSpeed, Origin + Vector2.right * idelShiftSpeed);
     }
 }

@@ -66,7 +66,7 @@ public class Player : Rebounder
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.TryGetComponent(out Enemy enemy))
+        if(other.CompareTag("Hurts"))
         {
             health--;
             damageEvent?.Invoke(health);

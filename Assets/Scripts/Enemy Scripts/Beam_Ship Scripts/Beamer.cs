@@ -8,11 +8,11 @@ public class Beamer : Enemy
 
     public bool firing;
     public bool readyToFire;
-    public Transform firePoint;
+    public Vector2 firePoint;
     private float timeToFire;
     public float maxTimeToFire;
     public float minTimeToFire;
-    public GameObject warnerObject;
+    public LaserBeam laser;
 
     void Update()
     {
@@ -29,8 +29,6 @@ public class Beamer : Enemy
     {
         timeToFire = UnityEngine.Random.Range(minTimeToFire, maxTimeToFire);
         yield return new WaitForSeconds(timeToFire);
-        GameObject o = Instantiate(warnerObject, firePoint);
-        o.TryGetComponent<Warner>(out Warner w);
-        w.parent = this;
+        laser.StartCoroutine("StartLaser");
     }
 }
