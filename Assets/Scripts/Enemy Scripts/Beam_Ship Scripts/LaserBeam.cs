@@ -12,7 +12,7 @@ public class LaserBeam : MonoBehaviour
 
     void Start()
     {
-        //parent.firing = true;
+        parent.firing = true;
         source.volume = volume;
         source.Play();
         StartCoroutine("FizzleOut");
@@ -21,7 +21,8 @@ public class LaserBeam : MonoBehaviour
     public IEnumerator FizzleOut()
     {
         yield return new WaitForSeconds(5f);
-        //parent.firing = false;
+        parent.firing = false;
+        parent.readyToFire = false;
         source.Stop();
         Destroy(this.gameObject);
     }
