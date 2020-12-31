@@ -67,6 +67,7 @@ public class Enemy : Rebounder
         }
         else if (idelInBetweenTimer > idelInBetweenDurration && shifted)
         {
+            transform.position += Vector3.down * .1f;
             chargeing = true;
         }
         else
@@ -113,10 +114,10 @@ public class Enemy : Rebounder
         return stage;
     }
 
-    private void Charge()
+    public virtual void Charge()
     {
-        bool v = transform.position.y - yPos > .5f;
-        rigidbody.velocity = v ? Vector2.down : Vector2.zero;
+        bool v = transform.position.y == yPos;
+        rigidbody.velocity = v ? Vector2.zero : Vector2.down;
         if (!v)
         {
             chargeing = false;

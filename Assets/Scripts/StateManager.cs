@@ -32,7 +32,8 @@ public static class StateManager
 
     public static void RestartGame()
     {
-        SceneManager.LoadSceneAsync(1);
+        LoadScene(2);
+        lost = false;
     }
 
     public static void LoadScene(int buildIndex)
