@@ -113,7 +113,7 @@ public class Enemy : Rebounder
         return stage;
     }
 
-    private void Charge()
+    public virtual void Charge()
     {
         bool v = transform.position.y - yPos > .5f;
         rigidbody.velocity = v ? Vector2.down : Vector2.zero;
