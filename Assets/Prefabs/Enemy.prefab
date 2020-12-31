@@ -101,9 +101,9 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.46, y: 0.47, z: 0}
   idelShiftAmount: 0.3
-  idelShiftDurration: 100
+  idelShiftDurration: 50
   idelShiftTimer: 0
-  idelInBetweenDurration: 300
+  idelInBetweenDurration: 100
   idelInBetweenTimer: 0
   xPos: 0
   yPos: 0

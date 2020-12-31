@@ -12,12 +12,6 @@ public class AltEnemy : Enemy
             direction = FindObjectOfType<Player>().transform.position - transform.position;
             direction.Normalize();
         }
-        bool v = transform.position.y - yPos > .5f;
-        rigidbody.velocity = v ? direction : Vector2.zero;
-        if (!v)
-        {
-            chargeing = false;
-            direction = Vector2.zero;
-        }
+        rigidbody.velocity = direction;
     }
 }
