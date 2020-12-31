@@ -9,18 +9,8 @@ public class WinObject : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
-        StateManager.winEvent += Activate;
-        StateManager.endNewLevelEvent += Deactivate;
-    }
-
-    private void Activate()
-    {
-        gameObject.SetActive(true);
-    }
-
-    private void Deactivate()
-    {
-        gameObject.SetActive(false);
+        StateManager.winEvent += delegate { gameObject.SetActive(true); };
+        StateManager.endNewLevelEvent += delegate { gameObject.SetActive(false); };
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

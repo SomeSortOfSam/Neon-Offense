@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2940214745835007719}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Hurts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.46, y: 0.47, z: 0}
-  idelShiftAmount: 0.3
+  idelShiftSpeed: 0
   idelShiftDurration: 50
   idelShiftTimer: 0
   idelInBetweenDurration: 100

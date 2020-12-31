@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(AudioSource))]
 public class Player : Rebounder
 {
+    public static Player instance;
+
     public Rigidbody2D ridgidBody;
     public Animator animator;
     public AudioSource audioSource;
@@ -25,6 +27,8 @@ public class Player : Rebounder
 
     private void Start()
     {
+        instance = this;
+
         ammo = 1;
         firingPause = 100;
 
@@ -62,7 +66,7 @@ public class Player : Rebounder
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.TryGetComponent(out Enemy enemy))
+        if(other.CompareTag("Hurts"))
         {
             health--;
             damageEvent?.Invoke(health);

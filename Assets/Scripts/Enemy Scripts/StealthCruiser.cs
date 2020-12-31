@@ -2,33 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StealthCruiser : Enemy
+public class StealthCruiser : AltEnemy
 {
     public Animator animator;
 
-    void Update()
+    public override void Charge()
     {
-        if (chargeing)
-        {
-            Charge();
-
-        }
-        else
-        {
-            Idel();
-            
-        }
+        base.Charge();
+        animator.SetBool("Cloaking", Vector3.Distance(transform.position,Origin) < .5f || Vector3.Distance(transform.position,Player.instance.transform.position) < .5f);
     }
-
-    public IEnumerator Uncloak()
-    {
-        yield return new WaitForSeconds(1f);
-        animator.SetBool("Cloaking", false);
-    }
-
-    public void Cloak()
-    {
-        animator.SetBool("Cloaking", true);
-    }
-
 }
