@@ -49,13 +49,13 @@ public class Player : Rebounder
     void Update()
     {
         ridgidBody.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, Input.GetAxisRaw("Vertical") * speed);
-        if (Input.GetMouseButton(0) && ammo > 0 && firingPause > 29)
+        if (Input.GetMouseButton(0) && ammo > 0 && firingPause > 69)
         {
             audioSource.PlayOneShot(fireSound);
             Instantiate(bullet, gameObject.transform.position + new Vector3(0, 1f, 0), new Quaternion());
             firingPause = 0;
         }
-        if (firingPause < 30)
+        if (firingPause < 70)
         {
             firingPause++;
         }
