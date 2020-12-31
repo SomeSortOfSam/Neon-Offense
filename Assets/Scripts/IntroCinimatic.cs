@@ -10,6 +10,7 @@ public class IntroCinimatic : MonoBehaviour
 {
     public List<Sprite> sprites = new List<Sprite>();
     public bool locked;
+    public bool endGame;
     public int index;
     public Image image;
     // Start is called before the first frame update
@@ -49,7 +50,14 @@ public class IntroCinimatic : MonoBehaviour
             else
             {
                 image.color = Color.black;
-                SceneManager.LoadSceneAsync(1);
+                if (endGame)
+                {
+                    Application.Quit();
+                }
+                else
+                {
+                    SceneManager.LoadSceneAsync(1);
+                }
             }
         }
     }
