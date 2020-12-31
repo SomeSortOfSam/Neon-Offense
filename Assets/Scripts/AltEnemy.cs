@@ -9,7 +9,7 @@ public class AltEnemy : Enemy
     {
         if(direction != Vector2.zero)
         {
-            direction = FindObjectOfType<Player>().transform.position - transform.position;
+            direction = Player.instance.transform.position - transform.position;
             direction.Normalize();
         }
         rigidbody.velocity = direction;

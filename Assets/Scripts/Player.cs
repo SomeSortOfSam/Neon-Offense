@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(AudioSource))]
 public class Player : Rebounder
 {
+    public static Player instance;
+
     public Rigidbody2D ridgidBody;
     public Animator animator;
     public AudioSource audioSource;
@@ -25,6 +27,8 @@ public class Player : Rebounder
 
     private void Start()
     {
+        instance = this;
+
         ammo = 1;
         firingPause = 100;
 
