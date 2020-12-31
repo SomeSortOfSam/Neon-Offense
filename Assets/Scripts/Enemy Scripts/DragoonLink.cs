@@ -2,31 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class DragoonLink : Enemy
 {
+    public DragoonLink parent;
+    public SpriteRenderer spriteRenderer;
 
-    public List<GameObject> links;
-
-    public int delay;
-    
     void Update()
     {
-        foreach (GameObject g in links)
+        if(parent != null)
         {
-            if(g == null)
-            {
-                links.Remove(g);
-            }
-        }
-        if (links[0].Equals(this.gameObject))
-        {
-            //move on own
+            rigidbody.velocity = (parent.transform.position + parent.transform.up) - transform.position;
+            transform.rotation = Quaternion.Euler(rigidbody.velocity);
         }
         else
         {
-            //follow the leader
+            Destroy(this);
         }
-
-        //shoot sometimes
     }
 }

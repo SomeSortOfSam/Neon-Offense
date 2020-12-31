@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7988270312570648179}
   m_Layer: 0
   m_Name: dragoon_link
-  m_TagString: Untagged
+  m_TagString: Hurts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7988270312570648185}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.68, y: 1.24, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,12 +98,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  idelShiftAmount: 0
-  idelShiftDurration: 0
+    m_Center: {x: 0, y: 0.01, z: 0}
+    m_Extent: {x: 0.36, y: 0.4, z: 0}
+  idelShiftSpeed: 1
+  idelShiftDurration: 20
   idelShiftTimer: 0
-  idelInBetweenDurration: 0
+  idelInBetweenDurration: 100
   idelInBetweenTimer: 0
   xPos: 0
   yPos: 0
@@ -112,8 +112,8 @@ MonoBehaviour:
   rigidbody: {fileID: 7988270312570648188}
   audioSource: {fileID: 7988270312570648189}
   deathSound: {fileID: 8300000, guid: c33c28c229407a3439529f48fe18adf6, type: 3}
-  links: []
-  delay: 0
+  parent: {fileID: 0}
+  spriteRenderer: {fileID: 0}
 --- !u!50 &7988270312570648188
 Rigidbody2D:
   serializedVersion: 4
@@ -241,7 +241,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

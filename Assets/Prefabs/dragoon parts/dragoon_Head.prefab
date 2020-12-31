@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 1369091974303678105}
   - component: {fileID: 1369091974303678109}
   - component: {fileID: 1369091974303678110}
-  - component: {fileID: 1369091974303678111}
   - component: {fileID: 1369091974303678108}
+  - component: {fileID: 1850127697771485197}
   m_Layer: 0
-  m_Name: dragoon_end
-  m_TagString: Untagged
+  m_Name: dragoon_Head
+  m_TagString: Hurts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,8 +28,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369091974303678106}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.68, y: 4.772, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6e59edc256c57b448a4889a461392e37, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e4d8883a9e6d48f409658b9524a57aea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -202,34 +202,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1369091974303678111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1369091974303678106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90457e8e5d843f042add144b73c2ce15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  idelShiftAmount: 0
-  idelShiftDurration: 0
-  idelShiftTimer: 0
-  idelInBetweenDurration: 0
-  idelInBetweenTimer: 0
-  xPos: 0
-  yPos: 0
-  shifted: 0
-  chargeing: 0
-  rigidbody: {fileID: 1369091974303678109}
-  audioSource: {fileID: 1369091974303678110}
-  deathSound: {fileID: 8300000, guid: c33c28c229407a3439529f48fe18adf6, type: 3}
-  links: []
 --- !u!60 &1369091974303678108
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -240,13 +212,13 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.9}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -283,3 +255,41 @@ PolygonCollider2D:
       - {x: 0.171875, y: -0.21875}
       - {x: 0.1875, y: -0.234375}
       - {x: 0.203125, y: -0.21875}
+--- !u!114 &1850127697771485197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369091974303678106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 439c64e278e0b044a9c93ea922c0fece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounds:
+    m_Center: {x: 0, y: -0.26, z: 0}
+    m_Extent: {x: 0.41, y: 0.36, z: 0}
+  idelShiftSpeed: 0
+  idelShiftDurration: 20
+  idelShiftTimer: 0
+  idelInBetweenDurration: 100
+  idelInBetweenTimer: 0
+  xPos: 0
+  yPos: 0
+  shifted: 0
+  chargeing: 0
+  rigidbody: {fileID: 1369091974303678109}
+  audioSource: {fileID: 1369091974303678110}
+  deathSound: {fileID: 8300000, guid: c33c28c229407a3439529f48fe18adf6, type: 3}
+  parent: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  startLinkNum: 3
+  link: {fileID: 7988270312570648185, guid: 27428659426c8df40a3a47c3d68f82df, type: 3}
+  end: {fileID: 21300000, guid: 6e59edc256c57b448a4889a461392e37, type: 3}
+  amplitude: 1
+  ampChange: 1
+  ampMax: 1
+  ampMin: 1
+  speed: 1
+  goingUp: 0
