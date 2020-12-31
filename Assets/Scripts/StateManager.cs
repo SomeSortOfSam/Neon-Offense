@@ -7,6 +7,8 @@ public static class StateManager
     public static bool lost = false;
     public static Action loseEvent;
     public static Action winEvent;
+    public static Action newLevelEvent;
+    public static Scene currentScene;
 
     public static void Lose()
     {
@@ -20,5 +22,23 @@ public static class StateManager
         {
             winEvent?.Invoke();
         }
+    }
+
+    public static void LoadNextScene()
+    {
+        LoadScene(currentScene.buildIndex + 1);
+    }
+
+    public static void RestartGame()
+    {
+        LoadScene(1);
+    }
+
+    public static void LoadScene(int buildIndex)
+    {
+        AsyncOperation Unload = SceneManager.UnloadSceneAsync(currentScene,UnloadSceneOptions.None);
+        AsyncOperation Load = SceneManager.LoadSceneAsync(buildIndex,LoadSceneMode.Additive);
+        currentScene = SceneManager.GetSceneByBuildIndex(buildIndex);
+        newLevelEvent?.Invoke();
     }
 }

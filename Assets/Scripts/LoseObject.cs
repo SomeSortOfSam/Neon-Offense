@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LoseObject : MonoBehaviour
 {
@@ -18,6 +17,6 @@ public class LoseObject : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        StateManager.RestartGame();
     }
 }

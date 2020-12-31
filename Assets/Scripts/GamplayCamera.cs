@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
@@ -36,7 +34,7 @@ public class GamplayCamera : MonoBehaviour
     {
         instance = this;
         camera = GetComponent<Camera>();
-        //Player.damageEvent += Shake;
+        Player.damageEvent += Shake;
     }
 
     private void Shake(int obj)
