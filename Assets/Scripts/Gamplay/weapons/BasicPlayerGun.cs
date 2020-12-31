@@ -14,12 +14,12 @@ public class BasicPlayerGun : Gun
 
     void Update()
     {
-        if(Input.GetMouseButton(0) && this.ammo > 0 && firingPause > 29)
+        if(Input.GetMouseButton(0) && this.ammo > 0 && firingPause > 59)
         {
             Instantiate(bullet, this.gameObject.transform.position + new Vector3(0, 1f, 0), new Quaternion());
             firingPause = 0;
         }
-        if(firingPause < 30)
+        if(firingPause < 60)
         {
             firingPause++;
         }
