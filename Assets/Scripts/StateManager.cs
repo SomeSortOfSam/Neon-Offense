@@ -32,7 +32,8 @@ public static class StateManager
 
     public static void RestartGame()
     {
-        LoadScene(1);
+        LoadScene(2);
+        lost = false;
     }
 
     public static void LoadScene(int buildIndex)
