@@ -11,7 +11,7 @@ public class WinObject : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
         StateManager.winEvent += Activate;
-        StateManager.newLevelEvent += Deactivate;
+        StateManager.endNewLevelEvent += Deactivate;
     }
 
     private void Activate()

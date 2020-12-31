@@ -10,7 +10,7 @@ public class StartGameObject : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(1,LoadSceneMode.Additive);
         StateManager.currentScene = SceneManager.GetSceneByBuildIndex(1);
-        StateManager.newLevelEvent?.Invoke();
+        StateManager.endNewLevelEvent?.Invoke();
         StateManager.winEvent?.Invoke();
         Destroy(gameObject);
     }
